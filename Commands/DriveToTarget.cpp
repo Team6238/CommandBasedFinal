@@ -13,7 +13,10 @@ void DriveToTarget::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void DriveToTarget::Execute() {
-	double power =  Robot::temp.GetCenterX() / 160;
+	double target = Robot::temp.GetCenterX();
+	double power = 0.5;
+	if (target!=-1)
+		power = target/160;
 	Robot::driveTrain.Drive(power);
 }
 
