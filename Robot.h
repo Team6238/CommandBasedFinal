@@ -13,6 +13,8 @@
 //#include <Subsystems/Intake.h>
 //#include <Subsystems/Elevator.h>
 //#include <Subsystems/VisionModule.h>
+#include <Subsystems/Temp.h>
+#include <Commands/Autonomous.h>
 
 class Robot: public frc::IterativeRobot{
 public:
@@ -22,9 +24,10 @@ public:
 	//static Pneumatics pneumatics;
 	static OI oi;
 	//static VisionModule vm;
-
+	static Temp temp;
 private:
 	frc::LiveWindow* lw = frc::LiveWindow::GetInstance();
+	Autonomous* autonomous = new Autonomous();
 
 	void RobotInit() override;
 	void AutonomousInit() override;
@@ -32,6 +35,9 @@ private:
 	void TeleopInit() override;
 	void TeleopPeriodic() override;
 	void TestPeriodic() override;
+
+
+	//double centerX = -1;
 };
 
 #endif  // OI_H

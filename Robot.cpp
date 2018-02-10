@@ -10,7 +10,8 @@ DriveTrain Robot::driveTrain;
 //Intake Robot::intake;
 //Pneumatics Robot::pneumatics;
 OI Robot::oi;
-double centerX = -1.0;
+Temp Robot::temp;
+
 //VisionModule Robot::vm;
 
 static void VisionThread(){
@@ -29,15 +30,18 @@ static void VisionThread(){
 			grip::TestPipeline gp;
 			gp.Process(source);
 			std::vector<cv::KeyPoint>* blobs = gp.GetFindBlobsOutput();
+			double centerX;
 			if (blobs->size() == 1)
 				centerX = blobs->at(0).pt.x;
 			else
 				centerX = -1;
+			Robot::temp.UpdateCenterX(centerX);
 			std::cout << "centerX: " << centerX << "\n";
 		}
 		Wait(1);
 	}
 }
+
 
 void Robot::RobotInit(){
 	std::thread visionThread(VisionThread);
@@ -46,7 +50,7 @@ void Robot::RobotInit(){
 
 
 	void Robot::AutonomousInit()  {
-
+		autonomous->Start();
 	}
 
 	void Robot::AutonomousPeriodic()  {
@@ -54,7 +58,7 @@ void Robot::RobotInit(){
 	}
 
 	void Robot::TeleopInit() {
-
+		autonomous->Cancel();
 	}
 
 	void Robot::TeleopPeriodic()  {

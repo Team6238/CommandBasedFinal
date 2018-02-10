@@ -18,6 +18,8 @@ public:
 	DriveTrain();
 	void InitDefaultCommand();
 	void Drive();
+	void Drive(double centerX);
+	bool IsStopped();
 };
 
 #endif  // DriveTrain_H
