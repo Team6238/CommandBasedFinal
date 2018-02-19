@@ -15,7 +15,7 @@ void DriveTrain::InitDefaultCommand() {
 }
 
 void DriveTrain::Drive() {
-	myDrive.TankDrive(-1*Robot::oi.GetLeftStick()->GetY(), -1*Robot::oi.GetRightStick()->GetY(), 1);
+	myDrive.TankDrive(Robot::oi.GetLeftStick()->GetY(), Robot::oi.GetRightStick()->GetY(), 1);
 	//std::cout << encoder->Get();
 }
 void DriveTrain::Drive(double centerX) {
