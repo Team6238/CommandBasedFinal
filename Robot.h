@@ -1,4 +1,3 @@
-//#define _GLIBCXX_USE_CXX11_ABI 0
 #ifndef ROBOT_H
 #define ROBOT_H
 
@@ -8,20 +7,19 @@
 
 #include <OI.h>
 #include <TestPipeline.h>
-//#include <Subsystems/Pneumatics.h>
+#include <Subsystems/Pneumatics.h>
 #include <Subsystems/DriveTrain.h>
-//#include <Subsystems/Intake.h>
-//#include <Subsystems/Elevator.h>
-//#include <Subsystems/VisionModule.h>
+#include <Subsystems/Intake.h>
+#include <Subsystems/Elevator.h>
 #include <Subsystems/Temp.h>
 #include <Commands/Autonomous.h>
 
 class Robot: public frc::IterativeRobot{
 public:
 	static DriveTrain driveTrain;
-	//static Intake intake;
-	//static Elevator elevator;
-	//static Pneumatics pneumatics;
+	static Intake intake;
+	static Elevator elevator;
+	static Pneumatics pneumatics;
 	static OI oi;
 	//static VisionModule vm;
 	static Temp temp;

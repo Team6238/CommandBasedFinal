@@ -7,10 +7,10 @@ OI::OI() {
 	rightStick = new Joystick(0);
 	leftStick = new Joystick(1);
 	solenoidButton = new JoystickButton(rightStick, 1);
-	forwardIntakeButton = new JoystickButton(rightStick, 2);
+	forwardIntakeButton = new JoystickButton(rightStick, 5);
 	backwardIntakeButton = new JoystickButton(rightStick, 3);
-	upwardElevatorButton = new JoystickButton(rightStick, 4);
-	downwardElevatorButton = new JoystickButton(rightStick, 5);
+	upwardElevatorButton = new JoystickButton(rightStick, 6);
+	downwardElevatorButton = new JoystickButton(rightStick, 4);
 	//solenoidButton->WhenPressed(new MoveSolenoid());
 }
 

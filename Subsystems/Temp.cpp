@@ -1,7 +1,7 @@
 #include "Temp.h"
 
 Temp::Temp() : Subsystem("Temp") {
-
+	centerX = -1;
 }
 
 void Temp::InitDefaultCommand() {

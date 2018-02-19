@@ -6,13 +6,11 @@
 #include <vector>
 
 DriveTrain Robot::driveTrain;
-//Elevator Robot::elevator;
-//Intake Robot::intake;
-//Pneumatics Robot::pneumatics;
+Elevator Robot::elevator;
+Intake Robot::intake;
+Pneumatics Robot::pneumatics;
 OI Robot::oi;
 Temp Robot::temp;
-
-//VisionModule Robot::vm;
 
 static void VisionThread(){
 	cs::UsbCamera camera;
