@@ -7,7 +7,7 @@
 class OI {
 private:
 	Joystick* rightStick, *leftStick;
-	JoystickButton *solenoidButton, *forwardIntakeButton, *backwardIntakeButton, *upwardElevatorButton, *downwardElevatorButton;
+	JoystickButton *solenoidButton, *shifterButton, *forwardIntakeButton, *backwardIntakeButton, *upwardElevatorButton, *downwardElevatorButton;
 
 public:
 	OI();

@@ -25,12 +25,16 @@ static void VisionThread(){
 		cvSink.GrabFrame(source);
 		outputStreamStd.PutFrame(source);
 		if (!source.empty()){
-			grip::TestPipeline gp;
+			grip::FindContours gp;
 			gp.Process(source);
-			std::vector<cv::KeyPoint>* blobs = gp.GetFindBlobsOutput();
+			std::vector<std::vector<cv::Point>>* contours = gp.GetFilterContoursOutput();
 			double centerX;
-			if (blobs->size() == 1)
-				centerX = blobs->at(0).pt.x;
+			if (contours->size() == 2){
+				std::vector<cv::Point> leftContour = contours->at(0), rightContour = contours->at(1);
+				cv::RotatedRect leftRect = cv::minAreaRect(leftContour), rightRect = cv::minAreaRect(rightContour);
+				double cxLeft = leftRect.center.x, cxRight = rightRect.center.x;
+				centerX = 0.5*(cxLeft+cxRight);
+			}
 			else
 				centerX = -1;
 			Robot::temp.UpdateCenterX(centerX);

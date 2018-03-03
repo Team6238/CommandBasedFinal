@@ -1,15 +1,16 @@
 #include "MoveSolenoid.h"
 #include "../Robot.h"
 
-MoveSolenoid::MoveSolenoid() {
+MoveSolenoid::MoveSolenoid(int i) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(&Robot::pneumatics);
+	target = i;
 }
 
 // Called just before this Command runs the first time
 void MoveSolenoid::Initialize() {
-	Robot::pneumatics.FlipSolenoid();
+	Robot::pneumatics.FlipSolenoid(target);
 }
 
 // Called repeatedly when this Command is scheduled to run

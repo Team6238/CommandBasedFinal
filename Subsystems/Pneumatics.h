@@ -5,18 +5,20 @@
 #include <Commands/Subsystem.h>
 #include <wpilib.h>
 
+#define NSolenoids 2
+
 class Pneumatics : public Subsystem {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	Solenoid *solenoid;
+	Solenoid *solenoids[NSolenoids];
+	bool states[NSolenoids];
 	Compressor *compressor;
-	bool state;
 
 public:
 	Pneumatics();
 	void InitDefaultCommand();
-	void FlipSolenoid();
+	void FlipSolenoid(int i);
 };
 
 #endif  // Pneumatics_H

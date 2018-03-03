@@ -7,6 +7,7 @@
 
 #include <OI.h>
 #include <TestPipeline.h>
+#include <FindContours.h>
 #include <Subsystems/Pneumatics.h>
 #include <Subsystems/DriveTrain.h>
 #include <Subsystems/Intake.h>
