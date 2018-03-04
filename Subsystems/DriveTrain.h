@@ -10,8 +10,8 @@
 
 class DriveTrain : public Subsystem {
 private:
-	WPI_TalonSRX frontLeft{30}, frontRight{31}, midLeft{34}, midRight{32}, backLeft{33}, backRight{36};
-	SpeedControllerGroup leftGroup{frontLeft, midLeft, backLeft}, rightGroup{frontRight, midRight, backRight};
+	WPI_TalonSRX right1{30}, right2{34}, right3{33}, left1{31}, left2{33}, left3{36};
+	SpeedControllerGroup leftGroup{left1, left2, left3}, rightGroup{right1, right2, right3};
 	DifferentialDrive myDrive{leftGroup, rightGroup};
 	//Encoder *encoder;
 public:

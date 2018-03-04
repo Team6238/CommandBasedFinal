@@ -19,9 +19,9 @@ void FindContours::Process(cv::Mat& source0){
 	//Step HSV_Threshold0:
 	//input
 	cv::Mat hsvThresholdInput = cvResizeOutput;
-	double hsvThresholdHue[] = {48.06820152151943, 101.49244855468928};
-	double hsvThresholdSaturation[] = {125.28776723275082, 254.924907759188};
-	double hsvThresholdValue[] = {122.30215535747061, 255.0};
+	double hsvThresholdHue[] = {36.322067915009306, 111.3585159100919};
+	double hsvThresholdSaturation[] = {0.0, 125.90443962670022};
+	double hsvThresholdValue[] = {157.46402294515704, 255.0};
 	hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, this->hsvThresholdOutput);
 	//Step Find_Contours0:
 	//input
@@ -34,7 +34,7 @@ void FindContours::Process(cv::Mat& source0){
 	double filterContoursMinArea = 0.0;  // default Double
 	double filterContoursMinPerimeter = 0.0;  // default Double
 	double filterContoursMinWidth = 0.0;  // default Double
-	double filterContoursMaxWidth = 1000;  // default Double
+	double filterContoursMaxWidth = 5.0;  // default Double
 	double filterContoursMinHeight = 10.0;  // default Double
 	double filterContoursMaxHeight = 1000;  // default Double
 	double filterContoursSolidity[] = {0, 100};
