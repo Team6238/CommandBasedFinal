@@ -15,11 +15,15 @@ void DriveTrain::InitDefaultCommand() {
 }
 
 void DriveTrain::Drive() {
+	/*double leftPower = -0.75*Robot::oi.GetLeftStick()->GetY();
+	double rightPower = -0.75*Robot::oi.GetRightStick()->GetY();
+	std::cout << leftPower << " " << rightPower << "\n";*/
 	myDrive.TankDrive(-1*Robot::oi.GetLeftStick()->GetY(), -1*Robot::oi.GetRightStick()->GetY(), 1);
 	//std::cout << encoder->Get();
 }
 void DriveTrain::Drive(double power) {
-	myDrive.TankDrive(power, 1 - power);
+	myDrive.TankDrive(power, 1 - power, 1);
+	//myDrive.TankDrive(0.5, 0.5, 1);
 }
 bool DriveTrain::IsStopped() {
 	return leftGroup.Get() == 0 && rightGroup.Get() == 0;
