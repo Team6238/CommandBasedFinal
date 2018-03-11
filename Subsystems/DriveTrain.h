@@ -10,7 +10,7 @@
 
 class DriveTrain : public Subsystem {
 private:
-	WPI_TalonSRX right1{30}, right2{34}, right3{33}, left1{31}, left2{33}, left3{36};
+	WPI_TalonSRX right1{30}, right2{34}, right3{33}, left1{31}, left2{32}, left3{36};
 	SpeedControllerGroup leftGroup{left1, left2, left3}, rightGroup{right1, right2, right3};
 	DifferentialDrive myDrive{leftGroup, rightGroup};
 	//Encoder *encoder;
@@ -18,7 +18,7 @@ public:
 	DriveTrain();
 	void InitDefaultCommand();
 	void Drive();
-	void Drive(double centerX);
+	void Drive(double power);
 	bool IsStopped();
 };
 

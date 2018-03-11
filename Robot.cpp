@@ -20,12 +20,12 @@ static void VisionThread(){
 	camera.SetResolution(640, 480);
 	cvSink = CameraServer::GetInstance()->GetVideo();
 	outputStreamStd = CameraServer::GetInstance()->PutVideo("Raw", 640, 480);
+	cv::Mat source;
+	grip::FindContours gp;
 	while (1){
-		cv::Mat source;
 		cvSink.GrabFrame(source);
 		outputStreamStd.PutFrame(source);
 		if (!source.empty()){
-			grip::FindContours gp;
 			gp.Process(source);
 			std::vector<std::vector<cv::Point>>* contours = gp.GetFilterContoursOutput();
 			double centerX;
@@ -40,7 +40,6 @@ static void VisionThread(){
 			Robot::temp.UpdateCenterX(centerX);
 			std::cout << "centerX: " << centerX << "\n";
 		}
-		Wait(1);
 	}
 }
 

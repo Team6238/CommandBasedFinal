@@ -10,27 +10,27 @@ FindContours::FindContours() {
 void FindContours::Process(cv::Mat& source0){
 	//Step CV_resize0:
 	//input
-	cv::Mat cvResizeSrc = source0;
+//	cv::Mat cvResizeSrc = source0;
 	cv::Size cvResizeDsize(0, 0);
 	double cvResizeFx = 0.25;  // default Double
 	double cvResizeFy = 0.25;  // default Double
     int cvResizeInterpolation = cv::INTER_LINEAR;
-	cvResize(cvResizeSrc, cvResizeDsize, cvResizeFx, cvResizeFy, cvResizeInterpolation, this->cvResizeOutput);
+	cvResize(source0, cvResizeDsize, cvResizeFx, cvResizeFy, cvResizeInterpolation, this->cvResizeOutput);
 	//Step HSV_Threshold0:
 	//input
-	cv::Mat hsvThresholdInput = cvResizeOutput;
-	double hsvThresholdHue[] = {51, 180};
-	double hsvThresholdSaturation[] = {112, 255};
-	double hsvThresholdValue[] = {157.46402294515704, 255.0};
-	hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, this->hsvThresholdOutput);
+	//cv::Mat hsvThresholdInput = cvResizeOutput;
+	double hsvThresholdHue[] = {42, 108};
+	double hsvThresholdSaturation[] = {0, 126};
+	double hsvThresholdValue[] = {177.46402294515704, 255.0};
+	hsvThreshold(cvResizeOutput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, this->hsvThresholdOutput);
 	//Step Find_Contours0:
 	//input
-	cv::Mat findContoursInput = hsvThresholdOutput;
+	//cv::Mat findContoursInput = hsvThresholdOutput;
 	bool findContoursExternalOnly = false;  // default Boolean
-	findContours(findContoursInput, findContoursExternalOnly, this->findContoursOutput);
+	findContours(hsvThresholdOutput, findContoursExternalOnly, this->findContoursOutput);
 	//Step Filter_Contours0:
 	//input
-	std::vector<std::vector<cv::Point> > filterContoursContours = findContoursOutput;
+	//std::vector<std::vector<cv::Point> > filterContoursContours = findContoursOutput;
 	double filterContoursMinArea = 0.0;  // default Double
 	double filterContoursMinPerimeter = 0.0;  // default Double
 	double filterContoursMinWidth = 0.0;  // default Double
@@ -42,7 +42,7 @@ void FindContours::Process(cv::Mat& source0){
 	double filterContoursMinVertices = 0;  // default Double
 	double filterContoursMinRatio = 0;  // default Double
 	double filterContoursMaxRatio = 1000;  // default Double
-	filterContours(filterContoursContours, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, this->filterContoursOutput);
+	filterContours(findContoursOutput, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, this->filterContoursOutput);
 }
 
 /**
