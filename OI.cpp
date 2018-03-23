@@ -13,8 +13,8 @@ OI::OI() {
 	backwardIntakeButton = new JoystickButton(rightStick, 5);
 	upwardElevatorButton = new JoystickButton(rightStick, 4);
 	downwardElevatorButton = new JoystickButton(rightStick, 6);
-	solenoidButton->WhenPressed(new MoveSolenoid(0));
-	shifterButton->WhenPressed(new MoveSolenoid(1));
+	solenoidButton->WhenPressed(new MoveSolenoid(1));
+	shifterButton->WhenPressed(new MoveSolenoid(0));
 
 }
 
