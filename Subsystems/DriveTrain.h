@@ -19,6 +19,7 @@ public:
 	void InitDefaultCommand();
 	void Drive();
 	void Drive(double power);
+	void Drive(double leftPower, double rightPower);
 	bool IsStopped();
 };
 

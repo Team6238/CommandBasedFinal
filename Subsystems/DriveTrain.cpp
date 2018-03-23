@@ -21,6 +21,11 @@ void DriveTrain::Drive() {
 void DriveTrain::Drive(double power) {
 	myDrive.TankDrive(power, 1 - power, 1);
 }
+
+void DriveTrain::Drive(double leftPower, double rightPower){
+	myDrive.TankDrive(leftPower, rightPower, 1);
+}
+
 bool DriveTrain::IsStopped() {
 	return leftGroup.Get() == 0 && rightGroup.Get() == 0;
 }
