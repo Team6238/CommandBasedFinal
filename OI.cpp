@@ -15,7 +15,6 @@ OI::OI() {
 	downwardElevatorButton = new JoystickButton(leftStick, 3);
 	solenoidButton->WhenPressed(new MoveSolenoid(1));
 	shifterButton->WhenPressed(new MoveSolenoid(0));
-
 }
 
 Joystick* OI::GetLeftStick() {

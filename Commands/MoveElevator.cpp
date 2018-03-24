@@ -22,6 +22,16 @@ void MoveElevator::Execute() {
 		Robot::elevator.Set(-1);
 	else
 		Robot::elevator.Set(0);
+	//POV control
+	/*int temp = Robot::oi.GetRightStick()->GetPOV();
+	if (temp != -1){
+		if (temp>180)
+			Robot::elevator.Set(1);
+		else
+			Robot::elevator.Set(-1);
+	}
+	else
+		Robot::elevator.Set(0);*/
 }
 
 // Make this return true when this Command no longer needs to run execute()
