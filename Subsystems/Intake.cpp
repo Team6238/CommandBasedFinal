@@ -11,8 +11,8 @@ void Intake::InitDefaultCommand() {
 }
 
 void Intake::Set(int direction){
-	leftTalon.Set(direction*0.5);
-	rightTalon.Set(direction*0.5);
+	leftTalon.Set(-1*direction*0.75);
+	rightTalon.Set(-1*direction*0.75);
 }
 
 // Put methods for controlling this subsystem

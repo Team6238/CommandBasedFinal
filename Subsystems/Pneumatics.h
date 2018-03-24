@@ -19,6 +19,7 @@ public:
 	Pneumatics();
 	void InitDefaultCommand();
 	void FlipSolenoid(int i);
+	void SetShifter();
 };
 
 #endif  // Pneumatics_H

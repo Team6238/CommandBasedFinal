@@ -2,6 +2,8 @@
 #define DriveToTarget_H
 
 #include "wpilib.h"
+#include <vector>
+#include <algorithm>
 
 class DriveToTarget : public Command {
 public:

@@ -6,7 +6,7 @@ DriveToTarget::DriveToTarget() {
 	// eg. Requires(Robot::chassis.get());
 	timer = new Timer();
 	Requires(&Robot::driveTrain);
-
+	Requires(&Robot::temp);
 }
 
 // Called just before this Command runs the first time
@@ -17,16 +17,15 @@ void DriveToTarget::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void DriveToTarget::Execute() {
-	double target = Robot::temp.GetCenterX();
 	double power = 0.5;
-	if (target!=-1)
-		power = target/160;
+	if (Robot::temp.GetCenterX()!=-1)
+		power = Robot::temp.GetCenterX()/160.0;
 	Robot::driveTrain.Drive(power);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool DriveToTarget::IsFinished() {
-	return timer->Get() > 5;
+	return timer->Get() > 4.0;
 	//return false;
 }
 
@@ -35,6 +34,7 @@ void DriveToTarget::End() {
 	timer->Stop();
 	timer->Reset();
 }
+
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run

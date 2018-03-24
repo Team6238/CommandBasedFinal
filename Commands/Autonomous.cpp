@@ -1,17 +1,26 @@
 #include "Autonomous.h"
+#include <iostream>
+#include "../Robot.h"
 
 Autonomous::Autonomous() {
-	if (!taskFlag){
+	//vision switch
+	/*if (!taskFlag){
 		AddSequential(new DriveStraight());
 	}else{
-		fieldData = DriverStation::GetInstance().GetGameSpecificMessage();
-		if (fieldData.at(0) == 'R')
-			xSwitch = 2;
-		if (fieldData.at(0) != xRobot){
-			AddSequential(new Turn(fieldData.at(0) - xRobot));
-		}
 		AddSequential(new DriveToTarget());
 		AddSequential(new DumpCube());
+	}*/
+
+	//50/50 blind switch
+	if (!taskFlag)
+		AddSequential(new DriveStraight());
+	else{
+		AddSequential (new FlipShifter());
+		AddSequential (new DriveStraight());
+		std::string temp = Robot::temp.GetFieldData();
+		SmartDashboard::PutString("fieldData" , temp);
+		if (temp.length()==3 && temp.at(0) == 'R')
+			AddSequential(new DumpCube());
 	}
 }
 

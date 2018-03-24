@@ -1,38 +1,34 @@
-#include "DriveStraight.h"
+#include "FlipShifter.h"
 #include "../Robot.h"
 
-
-DriveStraight::DriveStraight() {
+FlipShifter::FlipShifter() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires(&Robot::driveTrain);
-	timer = new Timer();
+	Requires(&Robot::pneumatics);
 }
 
 // Called just before this Command runs the first time
-void DriveStraight::Initialize() {
-	//Wait(7.0);
-	timer->Reset();
-	timer->Start();
+void FlipShifter::Initialize() {
+	Robot::pneumatics.SetShifter();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DriveStraight::Execute() {
-	Robot::driveTrain.Drive(0.65, 0.65);
+void FlipShifter::Execute() {
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DriveStraight::IsFinished() {
-	return timer->Get()>3.5;
+bool FlipShifter::IsFinished() {
+	return 1;
 }
 
 // Called once after isFinished returns true
-void DriveStraight::End() {
-	timer->Stop();
+void FlipShifter::End() {
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DriveStraight::Interrupted() {
+void FlipShifter::Interrupted() {
 
 }

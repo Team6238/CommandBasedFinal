@@ -11,7 +11,7 @@ void Elevator::InitDefaultCommand() {
 }
 
 void Elevator::Set(int direction){
-	talon.Set(direction*0.5);
+	talon.Set(-1*direction);
 }
 
 // Put methods for controlling this subsystem

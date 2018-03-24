@@ -1,9 +1,5 @@
 //#define _GLIBCXX_USE_CXX11_ABI 0
 #include <Robot.h>
-#include <iostream>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/core/core.hpp>
-#include <vector>
 
 DriveTrain Robot::driveTrain;
 Elevator Robot::elevator;
@@ -11,6 +7,10 @@ Intake Robot::intake;
 Pneumatics Robot::pneumatics;
 OI Robot::oi;
 Temp Robot::temp;
+
+bool comp(double a, double b){
+	return a > b;
+}
 
 static void VisionThread(){
 	cs::UsbCamera camera;
@@ -28,17 +28,20 @@ static void VisionThread(){
 		if (!source.empty()){
 			gp.Process(source);
 			std::vector<std::vector<cv::Point>>* contours = gp.GetFilterContoursOutput();
-			double centerX;
-			if (contours->size() == 2){
-				std::vector<cv::Point> leftContour = contours->at(0), rightContour = contours->at(1);
-				cv::RotatedRect leftRect = cv::minAreaRect(leftContour), rightRect = cv::minAreaRect(rightContour);
-				double cxLeft = leftRect.center.x, cxRight = rightRect.center.x;
-				centerX = 0.5*(cxLeft+cxRight);
+			std::vector<double> centers;
+			for (unsigned int i = 0; i < contours->size(); i++){
+				cv::RotatedRect temp = cv::minAreaRect(contours->at(i));
+				centers.push_back(temp.center.x);
 			}
-			else
-				centerX = -1;
+			double centerX = -1;
+			if (centers.size()>1){
+				if (Robot::temp.GetFieldData().at(0) == 'L')
+					sort(centers.begin(), centers.begin()+centers.size());
+				else
+					sort(centers.begin(), centers.begin()+centers.size(), comp);
+				centerX = (centers.at(0)+centers.at(1))/2.0;
+			}
 			Robot::temp.UpdateCenterX(centerX);
-			std::cout << "centerX: " << centerX << "\n";
 		}
 	}
 }
@@ -49,26 +52,34 @@ void Robot::RobotInit(){
 	visionThread.detach();
 }
 
+void Robot::DisabledInit(){
 
-	void Robot::AutonomousInit()  {
-		autonomous->Start();
-	}
+}
 
-	void Robot::AutonomousPeriodic()  {
-		frc::Scheduler::GetInstance()->Run();
-	}
+void Robot::DisabledPeriodic(){
+	Robot::temp.UpdateFieldData(DriverStation::GetInstance().GetGameSpecificMessage());
+}
 
-	void Robot::TeleopInit() {
-		autonomous->Cancel();
-	}
+void Robot::AutonomousInit()  {
+	autonomous->Start();
+}
 
-	void Robot::TeleopPeriodic()  {
-		frc::Scheduler::GetInstance()->Run();
-	}
+void Robot::AutonomousPeriodic()  {
+	frc::Scheduler::GetInstance()->Run();
+}
 
-	void Robot::TestPeriodic() {
+void Robot::TeleopInit() {
+	autonomous->Cancel();
+	flip->Start();
+}
 
-	}
+void Robot::TeleopPeriodic()  {
+	frc::Scheduler::GetInstance()->Run();
+}
+
+void Robot::TestPeriodic() {
+
+}
 
 
 START_ROBOT_CLASS(Robot)

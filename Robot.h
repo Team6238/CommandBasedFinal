@@ -5,6 +5,12 @@
 #include <IterativeRobot.h>
 #include <LiveWindow/LiveWindow.h>
 
+#include <iostream>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/core/core.hpp>
+#include <vector>
+#include <algorithm>
+
 #include <OI.h>
 #include <TestPipeline.h>
 #include <FindContours.h>
@@ -14,6 +20,8 @@
 #include <Subsystems/Elevator.h>
 #include <Subsystems/Temp.h>
 #include <Commands/Autonomous.h>
+#include <Commands/FlipShifter.h>
+
 
 class Robot: public frc::IterativeRobot{
 public:
@@ -27,8 +35,12 @@ public:
 private:
 	frc::LiveWindow* lw = frc::LiveWindow::GetInstance();
 	Autonomous* autonomous = new Autonomous();
+	Command* flip = new FlipShifter();
 
+	bool comp(double a, double b);
 	void RobotInit() override;
+	void DisabledInit() override;
+	void DisabledPeriodic() override;
 	void AutonomousInit() override;
 	void AutonomousPeriodic() override;
 	void TeleopInit() override;

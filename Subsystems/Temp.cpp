@@ -1,7 +1,6 @@
 #include "Temp.h"
 
 Temp::Temp() : Subsystem("Temp") {
-	centerX = -1;
 }
 
 void Temp::InitDefaultCommand() {
@@ -9,12 +8,19 @@ void Temp::InitDefaultCommand() {
 	// SetDefaultCommand(new MySpecialCommand());
 }
 
-void Temp::UpdateCenterX(double value) {
-	centerX = value;
+void Temp::UpdateCenterX(double data) {
+	centerX = data;
 }
-
 double Temp::GetCenterX() {
 	return centerX;
+}
+
+void Temp::UpdateFieldData(std::string data){
+	fieldData = data;
+}
+
+std::string Temp::GetFieldData(){
+	return fieldData;
 }
 
 // Put methods for controlling this subsystem

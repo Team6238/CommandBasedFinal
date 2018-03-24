@@ -7,12 +7,12 @@ OI::OI() {
 	// Process operator interface input here.
 	rightStick = new Joystick(0);
 	leftStick = new Joystick(1);
-	solenoidButton = new JoystickButton(rightStick, 1);
-	shifterButton = new JoystickButton(rightStick, 2);
-	forwardIntakeButton = new JoystickButton(rightStick, 3);
-	backwardIntakeButton = new JoystickButton(rightStick, 5);
+	solenoidButton = new JoystickButton(rightStick, 2);
+	shifterButton = new JoystickButton(leftStick, 7);
+	forwardIntakeButton = new JoystickButton(rightStick, 1);
+	backwardIntakeButton = new JoystickButton(leftStick, 1);
 	upwardElevatorButton = new JoystickButton(rightStick, 4);
-	downwardElevatorButton = new JoystickButton(rightStick, 6);
+	downwardElevatorButton = new JoystickButton(leftStick, 3);
 	solenoidButton->WhenPressed(new MoveSolenoid(1));
 	shifterButton->WhenPressed(new MoveSolenoid(0));
 
