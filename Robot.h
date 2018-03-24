@@ -12,7 +12,6 @@
 #include <algorithm>
 
 #include <OI.h>
-#include <TestPipeline.h>
 #include <FindContours.h>
 #include <Subsystems/Pneumatics.h>
 #include <Subsystems/DriveTrain.h>
