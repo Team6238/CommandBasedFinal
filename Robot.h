@@ -20,6 +20,9 @@
 #include <Subsystems/Temp.h>
 #include <Commands/Autonomous.h>
 #include <Commands/FlipShifter.h>
+#include <Commands/DriveStraight.h>
+#include <Commands/DriveToTarget.h>
+#include <Commands/DumpCube.h>
 
 
 class Robot: public frc::IterativeRobot{
@@ -33,7 +36,7 @@ public:
 	static Temp temp;
 private:
 	frc::LiveWindow* lw = frc::LiveWindow::GetInstance();
-	Autonomous* autonomous = new Autonomous();
+	//Autonomous* autonomous = new Autonomous();
 	Command* flip = new FlipShifter();
 
 	bool comp(double a, double b);

@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../Robot.h"
 
-Autonomous::Autonomous() {
+Autonomous::Autonomous(bool b):CommandGroup("Autonomous") {
 	//vision switch
 	/*if (!taskFlag){
 		AddSequential(new DriveStraight());
@@ -12,15 +12,10 @@ Autonomous::Autonomous() {
 	}*/
 
 	//50/50 blind switch
-	if (!taskFlag)
-		AddSequential(new DriveStraight());
-	else{
-		AddSequential (new FlipShifter());
-		AddSequential (new DriveStraight());
-		std::string temp = Robot::temp.GetFieldData();
-		SmartDashboard::PutString("fieldData" , temp);
-		if (temp.length()==3 && temp.at(0) == 'R')
-			AddSequential(new DumpCube());
-	}
+	AddSequential (new FlipShifter(), 1.0);
+	AddSequential (new DriveStraight(), 3.5);
+	SmartDashboard::PutBoolean("transferredB", b);
+	if (taskFlag && b == pos)
+			AddSequential(new DumpCube(), 3.0);
 }
 

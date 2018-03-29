@@ -35,7 +35,7 @@ static void VisionThread(){
 			}
 			double centerX = -1;
 			if (centers.size()>1){
-				if (Robot::temp.GetFieldData().at(0) == 'L')
+				if (!Robot::temp.GetPos())
 					sort(centers.begin(), centers.begin()+centers.size());
 				else
 					sort(centers.begin(), centers.begin()+centers.size(), comp);
@@ -57,11 +57,13 @@ void Robot::DisabledInit(){
 }
 
 void Robot::DisabledPeriodic(){
-	Robot::temp.UpdateFieldData(DriverStation::GetInstance().GetGameSpecificMessage());
 }
 
 void Robot::AutonomousInit()  {
-	autonomous->Start();
+	std::string s = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+	bool switchPos = s.length() > 0 && s.at(0) == 'R';
+	Command* auton = new Autonomous(switchPos);
+	auton->Start();
 }
 
 void Robot::AutonomousPeriodic()  {
@@ -69,7 +71,7 @@ void Robot::AutonomousPeriodic()  {
 }
 
 void Robot::TeleopInit() {
-	autonomous->Cancel();
+	//autonomous->Cancel();
 	flip->Start();
 }
 

@@ -18,12 +18,15 @@ void DriveStraight::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void DriveStraight::Execute() {
-	Robot::driveTrain.Drive(0.65, 0.65);
+	if (timer->Get() < 3.0)
+		Robot::driveTrain.Drive(0.65, 0.65);
+	else
+		Robot::driveTrain.Drive(0, 0);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool DriveStraight::IsFinished() {
-	return timer->Get()>3.5;
+	return timer->Get()>3.0;
 }
 
 // Called once after isFinished returns true

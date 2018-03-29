@@ -11,6 +11,9 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
+private:
+	Timer *timer;
 };
 
 #endif  // DumpCube_H

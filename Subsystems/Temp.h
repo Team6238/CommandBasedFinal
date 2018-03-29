@@ -13,15 +13,15 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 	double centerX = -1;
-	std::string fieldData = "";
+	bool pos = 0;
 
 public:
 	Temp();
 	void InitDefaultCommand();
 	void UpdateCenterX(double data);
 	double GetCenterX();
-	void UpdateFieldData(std::string data);
-	std::string GetFieldData();
+	void UpdatePos(bool b);
+	bool GetPos();
 };
 
 #endif  // Temp_H

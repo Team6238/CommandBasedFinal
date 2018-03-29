@@ -15,12 +15,12 @@ double Temp::GetCenterX() {
 	return centerX;
 }
 
-void Temp::UpdateFieldData(std::string data){
-	fieldData = data;
+void Temp::UpdatePos(bool data){
+	pos = data;
 }
 
-std::string Temp::GetFieldData(){
-	return fieldData;
+bool Temp::GetPos(){
+	return pos;
 }
 
 // Put methods for controlling this subsystem
