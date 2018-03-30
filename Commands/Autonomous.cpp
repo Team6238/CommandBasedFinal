@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../Robot.h"
 
-Autonomous::Autonomous(bool b):CommandGroup("Autonomous") {
+Autonomous::Autonomous(bool switchPos, bool robotPos, bool taskFlag):CommandGroup("Autonomous") {
 	//vision switch
 	/*if (!taskFlag){
 		AddSequential(new DriveStraight());
@@ -12,10 +12,10 @@ Autonomous::Autonomous(bool b):CommandGroup("Autonomous") {
 	}*/
 
 	//50/50 blind switch
-	AddSequential (new FlipShifter(), 1.0);
-	AddSequential (new DriveStraight(), 3.5);
-	SmartDashboard::PutBoolean("transferredB", b);
-	if (taskFlag && b == pos)
-			AddSequential(new DumpCube(), 3.0);
+	AddSequential (new FlipShifter());
+	AddSequential (new DriveStraight());
+	//SmartDashboard::PutBoolean("autonB", switchPos);
+	if (taskFlag && switchPos == robotPos)
+		AddSequential(new DumpCube());
 }
 

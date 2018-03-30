@@ -11,6 +11,7 @@ void Elevator::InitDefaultCommand() {
 }
 
 void Elevator::Set(int direction){
+
 	talon.Set(-1*direction);
 }
 

@@ -4,6 +4,7 @@
 #include <Commands/Command.h>
 #include <IterativeRobot.h>
 #include <LiveWindow/LiveWindow.h>
+#include <wpilib.h>
 
 #include <iostream>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -32,8 +33,10 @@ public:
 	static Elevator elevator;
 	static Pneumatics pneumatics;
 	static OI oi;
-	//static VisionModule vm;
 	static Temp temp;
+	SendableChooser<bool> *rpc, *tfc;
+	bool switchPosition = 0;
+
 private:
 	frc::LiveWindow* lw = frc::LiveWindow::GetInstance();
 	//Autonomous* autonomous = new Autonomous();
